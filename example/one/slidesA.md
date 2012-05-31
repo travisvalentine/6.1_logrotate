@@ -28,12 +28,12 @@
 # What just happened? #
 
 !SLIDE center transition=scrollUp
-You forgot to rotate your logs
+# You forgot to rotate your logs #
 
 !SLIDE center
 # You're not alone #
 
-* This is actually one of the most common ways a junior sys-admins can mess up a server.
+* This is actually one of the most common ways a junior sys-admin can mess up a server.
 * It's surprisingly easy to avoid.
 
 !SLIDE subsection
@@ -48,17 +48,19 @@ You forgot to rotate your logs
 !SLIDE bullets incremental
 # How it Works #
 
+* set up in a config file
 * runs as a daily cron job
-* takes what's in production.log
-* puts it in another file that is timestamped in a directory you specify
-* older logs deleted after certain time
+* takes what's in the log file
+* copies the data into another file that is timestamped in a directory you specify
+* older logs deleted after time
 
 !SLIDE bullets incremental
 # Features #
 
 * rotated a number of times before getting deleted
-* options (daily, weekly, monthly, notifempty, compress, create…)
-* I get a score, suggestions for improvement
+* allows automatic rotation, compression, removal, and mailing of log files
+* each log file may be handled daily, weekly, monthly, or when it grows too large
+* will not  modify  a log  multiple  times  in  one  day unless that log is based on the log’s size and logrotate is being run multiple times  each day, or unless the -f or -force option is used.
 
 !SLIDE subsection
 # When isn't it useful? #
@@ -68,3 +70,9 @@ You forgot to rotate your logs
 
 * It's an easy way to stay organized and keep your logs manageable
 * And therefore stay...performant?
+
+!SLIDE center bullets
+# Resources #
+
+* Logrotate on [linuxcommand.org](http://linuxcommand.org/man_pages/logrotate8.html)
+* Rails and logrotate
