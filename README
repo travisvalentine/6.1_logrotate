@@ -1,0 +1,11 @@
+Presentation on logrotate using showoff.
+
+Note to self: when using showoff and heroku, remember these steps for deploying to Heroku:
+
+- heroku create logrotate
+- bundle install
+- git add Gemfile Gemfile.lock config.ru
+- git commit -m 'herokuized'
+- git push heroku master
+
+This fixes the Heroku error `Failed to install gems via Bundler. Heroku push rejected, failed to compile Ruby/rack app`
