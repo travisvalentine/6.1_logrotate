@@ -91,7 +91,7 @@
   $ export PATH=${PATH}:/usr/local/sbin
 
 !SLIDE
-# Sample config #
+# Sample config in /etc/logrotate.d/ #
 
     @@@ diff 
     /Users/travisvalentine/hungry-projects/feed_engine/log/*.log {
