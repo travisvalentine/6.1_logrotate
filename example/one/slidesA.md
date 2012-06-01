@@ -1,10 +1,10 @@
-!SLIDE center transition=scrollUp
+!SLIDE center
 # Logrotate #
 
 !SLIDE subsection
 # Pop quiz, hot shot #
 
-!SLIDE bullets
+!SLIDE bullets incremental
 # The scenario... #
 
 * You put a ton of effort into building a great app
@@ -14,53 +14,63 @@
 !SLIDE subsection
 # Just one problem #
 
-!SLIDE center transition=scrollUp
-# The server is crashing #
+!SLIDE center transition=uncover
+# The server keeps crashing #
 
 !SLIDE bullets incremental
-# WTF #
+# Why? #
 
 * Turns out the logs are too big
-* There is no disk space as a result
-* This causes the server to crash
-
-!SLIDE subsection
-# What just happened? #
-
-!SLIDE center transition=scrollUp
-# You forgot to rotate your logs #
+* The RAM is full
+* There is no disk space
+* This causes problems debugging
+* And your server is crashing
 
 !SLIDE center
 # You're not alone #
 
-* This is actually one of the most common ways a junior sys-admin can mess up a server.
-* It's surprisingly easy to avoid.
+* This is actually one of the most common ways a junior sys-admin can mess up a server
 
 !SLIDE subsection
+# How to prevent this #
+
+!SLIDE center transition=scrollUp
+# Rotate your logs #
+
+!SLIDE center bullets
+# The good news #
+
+* It's surprisingly easy(*) to avoid
+
+!SLIDE subsection transition=fade
 # Enter logrotate #
 
-!SLIDE transition=fade
+!SLIDE
 # What Is It? #
 
 * a utility to manage and administer log files
-* most operating systems have it installed
 
 !SLIDE bullets incremental
 # How it Works #
 
 * set up in a config file
-* runs as a daily cron job
-* takes what's in the log file
-* copies the data into another file that is timestamped in a directory you specify
-* older logs deleted after time
+* runs as a cron job
+* takes the log file, copies the data into another file that is timestamped in a directory you specify
+* deletes older logs after certain time
+* most operating systems(*) have it installed
 
 !SLIDE bullets incremental
-# Features #
+# Some Features #
 
 * rotated a number of times before getting deleted
 * allows automatic rotation, compression, removal, and mailing of log files
 * each log file may be handled daily, weekly, monthly, or when it grows too large
-* will not  modify  a log  multiple  times  in  one  day unless that log is based on the log’s size and logrotate is being run multiple times  each day, or unless the -f or -force option is used.
+
+!SLIDE bullets
+# Why it's useful #
+
+* logs have short-term value
+* when they are rotated, you get rid of the invaluable stuff
 
 !SLIDE subsection
 # When isn't it useful? #
@@ -71,8 +81,41 @@
 * It's an easy way to stay organized and keep your logs manageable
 * And therefore stay...performant?
 
+!SLIDE subsection
+# Example #
+
+!SLIDE commandline incremental
+
+  $ brew install logrotate
+
+  $ export PATH=${PATH}:/usr/local/sbin
+
+!SLIDE
+# Sample config #
+
+    @@@ diff 
+    /Users/travisvalentine/hungry-projects/feed_engine/log/*.log {
+      size 0k
+      missingok
+      rotate 7
+      compress
+      delaycompress
+      notifempty
+      copytruncate
+    }
+
+!SLIDE commandline incremental
+
+  $ logrotate -f <configfile>
+
+!SLIDE center
+# Result #
+
+![Tada](logrotate.png)
+
 !SLIDE center bullets
 # Resources #
 
 * Logrotate on [linuxcommand.org](http://linuxcommand.org/man_pages/logrotate8.html)
-* Rails and logrotate
+* Tutorial on logrotate for [Rails](http://nullislove.com/2007/09/10/rotating-rails-log-files/)
+* My [gist](https://gist.github.com/2848862) with the code from this presentation
