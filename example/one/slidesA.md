@@ -24,7 +24,6 @@
 * The RAM is full
 * There is no disk space
 * This causes problems debugging
-* And your server is crashing
 
 !SLIDE center
 # You're not alone #
